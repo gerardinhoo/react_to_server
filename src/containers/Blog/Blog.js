@@ -12,16 +12,21 @@ class Blog extends Component {
     selectedPostId: null,
   };
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => {
-      const posts = res.data.slice(0, 6);
-      const updatePosts = posts.map(post => {
-        return {
-          ...post,
-          author: "Gerardinho",
-        };
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => {
+        const posts = res.data.slice(0, 6);
+        const updatePosts = posts.map(post => {
+          return {
+            ...post,
+            author: "Gerardinho",
+          };
+        });
+        this.setState({ posts: updatePosts });
+      })
+      .catch(error => {
+        console.log(error);
       });
-      this.setState({ posts: updatePosts });
-    });
   }
 
   postSelectedHandler(id) {
